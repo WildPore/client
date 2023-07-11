@@ -1,0 +1,32 @@
+.container {
+	> h1,
+	> h2,
+	> h3,
+	> h4,
+	> h5,
+	> h6 {
+		margin-left: 0;
+		margin-right: 0;
+		margin-bottom: var(--dist-md);
+	}
+
+	> *:not(:last-child, h1, h2, h3, h4, h5, h6) {
+		margin-bottom: var(--dist-lg);
+	}
+
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius-sm);
+	margin-top: var(--dist-md);
+	margin-bottom: var(--dist-xl);
+	padding: var(--dist-lg);
+
+	background-color: var(--local-bg-color);
+}
+
+.odd {
+	--local-bg-color: var(--bg-color);
+}
+
+.even {
+	--local-bg-color: var(--bg-color-alt);
+}

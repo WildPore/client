@@ -1,0 +1,72 @@
+.timeline {
+	font-size: var(--font-size-sm);
+
+	background-color: var(--bg-color-alt);
+	padding: 1rem;
+
+	height: 12rem;
+	width: 100%;
+
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
+	gap: var(--dist-md);
+}
+
+.line {
+	background-color: var(--link-color);
+	position: absolute;
+	top: 3rem;
+	width: 1px;
+	height: 100vh;
+}
+
+.dates {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: var(--dist-md);
+
+	> p {
+		padding: var(--dist-md) var(--dist-md);
+
+		&[data-current-day='true'] {
+			background-color: var(--link-color);
+			border-radius: var(--border-radius-sm);
+			color: var(--color-text-dark);
+		}
+	}
+}
+
+.events {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: var(--dist-md);
+	&Row {
+	}
+}
+
+.event {
+	padding: var(--dist-lg) var(--dist-md);
+	background-color: var(--bg-color-tertiary);
+	border-radius: var(--border-radius-sm);
+}
+
+.event[data-length='2'] {
+	grid-column: span 2;
+}
+
+.event[data-length='3'] {
+	grid-column: span 3;
+}
+
+.event[data-length='4'] {
+	grid-column: span 4;
+}
+
+.event[data-length='5'] {
+	grid-column: span 5;
+}
+
+.event[data-length='6'] {
+	grid-column: span 6;
+}

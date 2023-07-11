@@ -1,0 +1,22 @@
+.container {
+	> h1,
+	> h2,
+	> h3,
+	> h4,
+	> h5,
+	> h6 {
+		margin-top: var(--dist-md);
+		margin-bottom: var(--dist-sm);
+		margin-left: var(--dist-0);
+	}
+
+	margin: var(--dist-0) var(--dist-lg);
+
+	& ~ div {
+		margin-top: var(--dist-md);
+	}
+
+	p > p {
+		margin-bottom: var(--dist-0);
+	}
+}

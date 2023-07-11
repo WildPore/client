@@ -1,0 +1,47 @@
+.card {
+	width: 15rem;
+	min-height: 10rem;
+
+	background-color: var(--bg-color-alt);
+	border-radius: var(--border-radius-lg);
+	padding: var(--dist-md);
+
+	box-shadow: var(--shadow-elevation-medium);
+}
+
+.titleContainer {
+	display: grid;
+	grid-template-areas:
+		'icon title'
+		'icon dates';
+}
+
+.iconBox {
+	grid-area: icon;
+
+	background-color: var(--bg-color-tertiary);
+	border-radius: var(--border-radius-md);
+	--size: 2.75rem;
+	width: var(--size);
+	height: var(--size);
+
+	box-shadow: var(--shadow-elevation-low);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.icon {
+}
+
+.title {
+	grid-area: title;
+	font-size: var(--font-size-sm);
+}
+
+.dates {
+	grid-area: dates;
+	font-size: var(--font-size-sm);
+	color: var(--font-color-low-emphasis);
+}

@@ -1,0 +1,20 @@
+.button {
+	color: inherit;
+	background-color: hsl(var(--chroma, 0deg 0%) var(--tone, var(--tone-1)));
+	border: none;
+	border-radius: var(--border-radius-sm);
+	padding: var(--dist-sm);
+
+	&:not(:last-child) {
+		margin-right: var(--dist-sm);
+	}
+
+	&:hover {
+		background-color: hsl(
+			var(--chroma, 0deg 0%) calc(var(--tone) + var(--lighten-amount))
+		);
+
+		border-radius: var(--border-radius-md);
+		transition: border-radius 0.25s var(--cubic-bezier);
+	}
+}

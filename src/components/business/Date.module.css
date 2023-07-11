@@ -1,0 +1,10 @@
+.container {
+	font-size: var(--font-size-sm);
+	padding: var(--dist-sm);
+	border-radius: var(--border-radius-sm);
+
+	background-color: hsl(0deg 0% var(--tone));
+	&:hover {
+		background-color: hsl(0deg 0% var(--tone-hover));
+	}
+}

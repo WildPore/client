@@ -1,0 +1,275 @@
+/* Josh Comeau's Reset */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+
+	@media (prefers-color-scheme: dark) {
+		-moz-osx-font-smoothing: grayscale;
+	}
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+	isolation: isolate;
+}
+
+/* Typography */
+body {
+	font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans',
+		Arial, sans-serif;
+}
+
+/* Variables */
+:root {
+	--tone-1: 88%;
+	--tone-2: 76%;
+	--tone-3: 66%;
+	--tone-4: 37%;
+	--tone-5: 27%;
+	--tone-6: 17%;
+
+	--color-text: hsl(0, 0%, 0%);
+	--color-text-dark: hsl(0, 0%, 100%);
+	--color-bg: hsl(0deg 0% 100%);
+	--color-bg-alt: hsl(0, 0%, 98%);
+	--color-bg-tertiary: hsl(0 0% 94%);
+	--color-bg-dark: hsl(0, 0%, 6%);
+	--color-bg-dark-alt: hsl(0, 0%, 9%);
+	--color-bg-dark-tertiary: hsl(0, 0%, 11%);
+
+	--chroma-accent: 120deg 100%;
+	--color-accent: hsl(157, 62%, 39%);
+	--color-accent-dark: hsl(216, 100%, 33%);
+
+	--color-border: hsl(0deg 0% var(--tone-1));
+	--color-border-dark: hsl(0deg 0% var(--tone-6));
+
+	--dist-0: 0rem;
+	--dist-px: 0.0625rem;
+	--dist-xs: 0.125rem;
+	--dist-sm: 0.25rem;
+	--dist-md: 0.5rem;
+	--dist-lg: 1rem;
+	--dist-xl: 2rem;
+
+	--font-size-xs: 0.75rem;
+	--font-size-sm: 0.85rem;
+	--font-size-md: 1rem;
+	--font-size-lg: 1.15rem;
+	--font-size-xl: 1.25rem;
+
+	--border-radius-sm: 4px;
+	--border-radius-md: 6px;
+	--border-radius-lg: 10px;
+
+	--cubic-bezier: cubic-bezier(0.8, -0.25, 0.37, 1);
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--font-color: var(--color-text);
+		--font-color-alt: var(--color-text-dark);
+		--font-color-low-emphasis: hsl(0deg 0% var(--tone-4));
+		--bg-color: var(--color-bg);
+		--bg-color-alt: var(--color-bg-alt);
+		--bg-color-tertiary: var(--color-bg-tertiary);
+		--border-color: var(--color-border);
+		--link-color: var(--color-accent);
+
+		--shadow-color: 0deg 0% var(--tone-1);
+		--shadow-elevation-low: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
+			0.4px 0.8px 1px -1.2px hsl(var(--shadow-color) / 0.34),
+			1px 2px 2.5px -2.5px hsl(var(--shadow-color) / 0.34);
+		--shadow-elevation-medium: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
+			0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36),
+			2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
+			5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
+		--shadow-elevation-high: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
+			1.5px 2.9px 3.7px -0.4px hsl(var(--shadow-color) / 0.34),
+			2.7px 5.4px 6.8px -0.7px hsl(var(--shadow-color) / 0.34),
+			4.5px 8.9px 11.2px -1.1px hsl(var(--shadow-color) / 0.34),
+			7.1px 14.3px 18px -1.4px hsl(var(--shadow-color) / 0.34),
+			11.2px 22.3px 28.1px -1.8px hsl(var(--shadow-color) / 0.34),
+			17px 33.9px 42.7px -2.1px hsl(var(--shadow-color) / 0.34),
+			25px 50px 62.9px -2.5px hsl(var(--shadow-color) / 0.34);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--font-color: var(--color-text-dark);
+		--font-color-alt: var(--color-text);
+		--font-color-low-emphasis: hsl(0deg 0% var(--tone-3));
+		--bg-color: var(--color-bg-dark);
+		--bg-color-alt: var(--color-bg-dark-alt);
+		--bg-color-tertiary: var(--color-bg-dark-tertiary);
+		--border-color: var(--color-border-dark);
+		--link-color: var(--color-accent);
+
+		--shadow-color: 0deg 0% 3%;
+		--shadow-elevation-low: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
+			0.4px 0.8px 1px -1.2px hsl(var(--shadow-color) / 0.34),
+			1px 2px 2.5px -2.5px hsl(var(--shadow-color) / 0.34);
+		--shadow-elevation-medium: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.36),
+			0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.36),
+			2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.36),
+			5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.36);
+		--shadow-elevation-high: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.34),
+			1.5px 2.9px 3.7px -0.4px hsl(var(--shadow-color) / 0.34),
+			2.7px 5.4px 6.8px -0.7px hsl(var(--shadow-color) / 0.34),
+			4.5px 8.9px 11.2px -1.1px hsl(var(--shadow-color) / 0.34),
+			7.1px 14.3px 18px -1.4px hsl(var(--shadow-color) / 0.34),
+			11.2px 22.3px 28.1px -1.8px hsl(var(--shadow-color) / 0.34),
+			17px 33.9px 42.7px -2.1px hsl(var(--shadow-color) / 0.34),
+			25px 50px 62.9px -2.5px hsl(var(--shadow-color) / 0.34);
+	}
+}
+
+body {
+	background-color: var(--bg-color);
+	color: var(--font-color);
+	font-size: var(--font-size-md);
+}
+
+.tone {
+	&:hover {
+		--tone-hover: calc(var(--tone) + var(--lighten-amount, -3%));
+	}
+}
+
+.tone1 {
+	color: var(--color-text);
+	--tone: var(--tone-1);
+	--lighten-amount: -5%;
+}
+
+.tone2 {
+	color: var(--color-text);
+	--tone: var(--tone-2);
+	--lighten-amount: -3%;
+}
+
+.tone3 {
+	color: var(--color-text);
+	--tone: var(--tone-3);
+	--lighten-amount: -3%;
+}
+
+.tone4 {
+	color: var(--color-text-dark);
+	--tone: var(--tone-4);
+	--lighten-amount: 5%;
+}
+
+.tone5 {
+	color: var(--color-text-dark);
+	--tone: var(--tone-5);
+	--lighten-amount: 6%;
+}
+
+.tone6 {
+	color: var(--color-text-dark);
+	--tone: var(--tone-6);
+	--lighten-amount: 4%;
+}
+
+.fs-sm {
+	font-size: var(--font-size-sm);
+}
+
+.fs-md {
+	font-size: var(--font-size-md);
+}
+
+.fs-lg {
+	font-size: var(--font-size-lg);
+}
+
+.mt-sm {
+	margin-top: var(--dist-sm);
+}
+.mb-sm {
+	margin-bottom: var(--dist-sm);
+}
+.ml-sm {
+	margin-left: var(--dist-sm);
+}
+.mr-sm {
+	margin-right: var(--dist-sm);
+}
+.mt-md {
+	margin-top: var(--dist-md);
+}
+.mb-md {
+	margin-bottom: var(--dist-md);
+}
+.ml-md {
+	margin-left: var(--dist-md);
+}
+.mr-md {
+	margin-right: var(--dist-md);
+}
+.mt-lg {
+	margin-top: var(--dist-lg);
+}
+.mb-lg {
+	margin-bottom: var(--dist-lg);
+}
+.ml-lg {
+	margin-left: var(--dist-lg);
+}
+.mr-lg {
+	margin-right: var(--dist-lg);
+}
+
+.visuallyHidden {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
