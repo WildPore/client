@@ -3,26 +3,40 @@ import { useId, useState } from 'react';
 import styles from './NewItemForm.module.css';
 
 import { Item } from '../models/item';
+const items: Item[] = await readItemsFromDB();
 
 interface NewItemFormProps {
-	items: Item[];
+	onSubmit: Function;
 }
 
-export default function NewItemForm({ items }: NewItemFormProps): JSX.Element {
+export default function NewItemForm({
+	onSubmit,
+}: NewItemFormProps): JSX.Element {
+	const [itemId, setItemId] = useState(-1);
 	const [active, setActive] = useState(0);
 	const [spare, setSpare] = useState(0);
 
 	function handleSubmit(event: any) {
 		event.preventDefault();
-		// ...
+		const item = items.filter(({ id }) => id === itemId)[0].name;
+		onSubmit({ id: itemId, item, active, spare });
 	}
 
 	return (
 		<div className={styles.formWrapper}>
 			<form action='' onSubmit={handleSubmit} className={styles.form}>
+				<p>{itemId}</p>
 				<div className={styles.formRow}>
 					<label htmlFor='item-name'>Item</label>
-					<select name='item-name' id='item-name'>
+					<select
+						name='item-name'
+						id='item-name'
+						value={itemId}
+						onChange={(event: any) => setItemId(Number(event.target.value))}
+					>
+						<option value={-1} disabled>
+							Choose Item...
+						</option>
 						{items.map(({ id, name }) => (
 							<option value={id}>{name}</option>
 						))}
@@ -52,7 +66,7 @@ export default function NewItemForm({ items }: NewItemFormProps): JSX.Element {
 					<p>{active + spare}</p>
 				</div>
 
-				<button className={styles.fullWidth} type='button'>
+				<button className={styles.fullWidth} type='submit'>
 					Add Item
 				</button>
 			</form>
@@ -88,4 +102,15 @@ function InputNumber({
 			/>
 		</>
 	);
+}
+
+async function readItemsFromDB(): Promise<Item[]> {
+	const response = await fetch('http://localhost:8080/items', {
+		method: 'GET',
+		headers: {},
+	});
+
+	const items = await response.json();
+
+	return items;
 }

@@ -104,8 +104,6 @@ export default function Event() {
 			<button>Change end date</button>
 			<button>Delete</button>
 
-			<NewItemForm items={items} />
-
 			{/* <div>
 				<h3>Order:</h3>
 				<table>
