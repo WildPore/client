@@ -1,5 +1,7 @@
 import { useReducer } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
+
+import EventCard from '../components/eventCard/EventCard';
 
 interface Event {
 	id: number;
@@ -36,15 +38,15 @@ export default function Events() {
 	function dataReducer(events: Event[], action: any) {
 		switch (action.type) {
 			case 'created': {
-				return [];
+				return [...events, action.event];
 			}
 
 			case 'updated': {
-				return [];
+				return events;
 			}
 
 			case 'deleted': {
-				return [];
+				return events;
 			}
 
 			default: {
@@ -53,28 +55,23 @@ export default function Events() {
 		}
 	}
 
+	function handleCreate(event: any) {
+		dispatch({ type: 'created', event });
+	}
+
 	return (
 		<>
 			<h2>Events</h2>
 			<div>
 				{events.map(({ id, name, startDate, endDate }: Event) => (
-					<Event id={id} name={name} startDate={startDate} endDate={endDate} />
+					<EventCard
+						id={id}
+						name={name}
+						startDate={startDate}
+						endDate={endDate}
+					/>
 				))}
 			</div>
 		</>
-	);
-}
-
-// TODO: Create event stub item
-// Takes event data item, can we create the link to the route independently or does that have to be drilled to this component?
-function Event({ id, name, startDate, endDate }: Event) {
-	return (
-		<div>
-			<Link to={`/events/${id}`}>
-				[{id}]: {name}
-			</Link>
-			<p>Starts on {startDate.toString()}</p>
-			<p>Ends by {endDate.toString()}</p>
-		</div>
 	);
 }

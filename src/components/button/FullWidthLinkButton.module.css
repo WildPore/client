@@ -1,0 +1,9 @@
+.button {
+	text-align: left;
+	padding: 0;
+	margin: 0;
+	border: none;
+	outline: none;
+	background-color: inherit;
+	width: 100%;
+}

@@ -2,22 +2,23 @@
 	background-color: var(--bg-color-alt);
 	border-radius: var(--border-radius-sm);
 	box-shadow: var(--shadow-elevation-low);
-	width: 15rem;
 	margin-bottom: var(--dist-lg);
 }
 
-.titleWrapper {
-	padding: var(--dist-sm) var(--dist-md);
+.headerWrapper {
+	& button {
+		padding: var(--dist-sm) var(--dist-md);
+	}
+
 	border-top-left-radius: var(--border-radius-sm);
 	border-top-right-radius: var(--border-radius-sm);
 	border-bottom: 1px solid var(--border-color);
-
 	background-color: var(--bg-color-tertiary);
-	/* background-color: aliceblue; */
-}
+	cursor: pointer;
 
-.title {
+	/* background-color: aliceblue; */
 	font-weight: 600;
+	width: 100%;
 }
 
 .contentWrapper {
