@@ -31,6 +31,7 @@ import Assets from './pages/Assets';
 import { assetsLoader } from './pages/Assets';
 import Events, { eventsLoader } from './pages/Events';
 import Event, { eventLoader } from './pages/Event';
+import Sidebar from './components/layouts/Sidebar';
 
 let router = createBrowserRouter([
 	{
@@ -99,7 +100,7 @@ function Layout() {
 
 	return (
 		<div className={styles.container}>
-			{/* <Sidebar /> */}
+			<Sidebar />
 
 			<div style={{ position: 'fixed', top: 0, right: 0 }}>
 				{navigation.state !== 'idle' && <p>Navigation in progress...</p>}
@@ -107,7 +108,9 @@ function Layout() {
 				{fetcherInProgress && <p>Fetcher in progress...</p>}
 			</div>
 
-			<Outlet />
+			<div className='wrapper'>
+				<Outlet />
+			</div>
 		</div>
 	);
 }
