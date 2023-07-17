@@ -1,18 +1,38 @@
 // import Cell from './Cell';
 import { useState } from 'react';
 import styles from './Table.module.css';
-import { Order } from '../../models/order';
+import { Column } from '../../models/column';
 
-interface TableProps {
-	rows: Array<any>;
+interface TableProps<T> {
+	columns: Column<T>[];
+	rows: T[];
 	setRows: Function;
 }
 
-export default function Table({ rows, setRows }: TableProps): JSX.Element {
+export default function Table<T extends object>({
+	columns,
+	rows,
+	setRows,
+}: TableProps<T>): JSX.Element {
+	const [columnState, setColumnState] = useState(columns);
+
 	const [dragTooltip, position, isDragging, dragHandlers] = useDrag(
 		rows,
-		setRows
+		setRows,
+		() => 'okay'
 	);
+
+	const [
+		columnDragTooltip,
+		columnTooltipPosition,
+		columnIsDragging,
+		columnDragHandlers,
+	] = useDrag(columnState, setColumnState, ({ display }: Column<T>) => (
+		<>{display}</>
+	));
+
+	// const [ColTooltip, colDndHandlers]: [React.ReactNode, Function[]]
+	// useDnd(state: [value, setValue], tooltipConstructor)
 
 	function rowReducer(rows: Array<any>, action: { row: any; type: string }) {
 		switch (action.type) {
@@ -40,26 +60,37 @@ export default function Table({ rows, setRows }: TableProps): JSX.Element {
 			onMouseMove={(event) => dragHandlers.handleMouseMove(event)}
 			onMouseLeave={() => dragHandlers.handleMouseLeave()}
 		>
+			{dragTooltip}T{/* <ColTooltip /> */}
 			<div
 				style={{
 					position: 'absolute',
-					left: `${position.x}px`,
-					top: `${position.y}px`,
-					visibility: isDragging ? 'visible' : 'hidden',
+					left: `${columnTooltipPosition.x}px`,
+					top: `${columnTooltipPosition.y}px`,
+					visibility: columnIsDragging ? 'visible' : 'hidden',
 				}}
 			>
-				{dragTooltip}
+				{columnDragTooltip}
 			</div>
 			<table className={styles.table}>
-				<thead>
+				<thead
+					onMouseUp={() => columnDragHandlers.handleMouseUp()}
+					onMouseMove={(event) => columnDragHandlers.handleMouseMove(event)}
+					onMouseLeave={() => columnDragHandlers.handleMouseLeave()}
+				>
 					<tr>
 						<th></th>
-						<th>ID</th>
-						<th>Item</th>
-						<th>Active</th>
-						<th>Spare</th>
-						<th>Fulfilled</th>
-						<th>Note</th>
+						{columns.map(({ display }: Column<T>, index) => (
+							<th
+								onMouseEnter={() => columnDragHandlers.handleMouseEnter(index)}
+							>
+								<button
+									type='button'
+									onMouseDown={() => columnDragHandlers.handleMouseDown(index)}
+								>
+									{display}
+								</button>
+							</th>
+						))}
 					</tr>
 				</thead>
 				<tbody>
@@ -73,12 +104,9 @@ export default function Table({ rows, setRows }: TableProps): JSX.Element {
 									Handle
 								</button>
 							</td>
-							<td>{row.id}</td>
-							<td>{row.item}</td>
-							<td>{row.active}</td>
-							<td>{row.spare}</td>
-							<td>{row.fulfilled}</td>
-							<td>{row.note}</td>
+							{columns.map(({ cell }: Column<T>) => (
+								<td>{cell(row)}</td>
+							))}
 						</tr>
 					))}
 				</tbody>
@@ -97,7 +125,8 @@ interface Handlers {
 
 function useDrag(
 	items: any[],
-	setItems: Function
+	setItems: Function,
+	dndTooltip: (arg: any) => React.ReactNode
 ): [
 	React.ReactNode | null,
 	{ x: number | null; y: number | null },
@@ -116,10 +145,27 @@ function useDrag(
 		y: number | null;
 	});
 
+	function Tooltip(content: React.ReactNode) {
+		return (
+			<div
+				style={{
+					position: 'absolute',
+					left: `${mousePosition.x}px`,
+					top: `${mousePosition.y}px`,
+					// visibility: dragging ? 'visible' : 'hidden',
+				}}
+			>
+				{content}
+			</div>
+		);
+	}
+
 	function handleMouseDown(index: number) {
 		setDragging(true);
-		setTooltip(items[index].item);
 		setInitialRow(index);
+		setTooltip(Tooltip('Tooltip'));
+
+		console.log(items[index]);
 	}
 
 	function handleMouseUp() {
@@ -135,6 +181,10 @@ function useDrag(
 	}
 
 	function handleMouseMove(event: any) {
+		if (!dragging) {
+			return;
+		}
+
 		const offset = {
 			x: 25,
 			y: -15,
