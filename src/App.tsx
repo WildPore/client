@@ -25,10 +25,8 @@ import {
 import type { Todos } from './todos';
 import { addTodo, deleteTodo, getTodos } from './todos';
 
-import Orders from './pages/Orders';
-import { ordersLoader } from './pages/Orders';
-import Assets from './pages/Assets';
-import { assetsLoader } from './pages/Assets';
+import Orders, { ordersLoader } from './pages/Orders';
+import Assets, { assetsLoader } from './pages/Assets';
 import Events, { eventsLoader } from './pages/Events';
 import Event, { eventLoader } from './pages/Event';
 import Sidebar from './components/layouts/Sidebar';

@@ -104,33 +104,6 @@ export default function Event() {
 			<button>Change end date</button>
 			<button>Delete</button>
 
-			{/* <div>
-				<h3>Order:</h3>
-				<table>
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Item</th>
-							<th>Active</th>
-							<th>Spare</th>
-							<th>Total</th>
-							<th>Fulfilled</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						{order.map((_) => (
-							<Order
-								key={_.id}
-								value={_}
-								handleUpdate={handleOrderUpdate}
-								handleDelete={handleOrderDelete}
-							/>
-						))}
-					</tbody>
-				</table>
-			</div> */}
-
 			<Outlet />
 		</>
 	);
