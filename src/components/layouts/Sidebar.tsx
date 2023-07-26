@@ -44,7 +44,7 @@ function Nav() {
 		<nav className={styles.nav}>
 			<ul>
 				<NavItem to='/orders'>Orders</NavItem>
-				<NavItem to='/inventory'>Inventory</NavItem>
+				<NavItem to='/assets'>Inventory</NavItem>
 				<NavItem to='/events'>Events</NavItem>
 				<NavItem to='/details'>Details</NavItem>
 				<NavDropdown label='Dropdown Item'>

@@ -2,7 +2,6 @@ import { useReducer } from 'react';
 import { LoaderFunctionArgs, Outlet, useLoaderData } from 'react-router-dom';
 
 import { getItems, orderCreate, orderDelete, orderUpdate } from '../utils/http';
-import NewItemForm from '../components/NewItemForm';
 
 const URL = 'http://localhost:8080/events';
 

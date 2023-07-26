@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
+import { Row, Column } from '../models/table';
 import { Item } from '../models/item';
 
 import styles from './Assets.module.css';
+
+import Table from '../components/table/Table';
 
 const URL = 'http://localhost:8080/items';
 const AUTH = login();
@@ -38,16 +42,35 @@ export async function assetsLoader(): Promise<AssetsLoaderData> {
 	return { data };
 }
 
+// Implementing table in this page.
+// Need a model for the asset data
+
+const assetColumns: Array<Column<Item>> = [
+	{
+		name: 'maxHeld',
+		Header: () => <span>Max Held</span>,
+		Cell: ({ row }: Row<Item>) => <span>{row.maxHeld}</span>,
+	},
+	{
+		name: 'name',
+		Header: () => <span>Item</span>,
+		Cell: ({ row }: Row<Item>) => <span>{row.name}</span>,
+	},
+	{
+		name: 'findEvents',
+		Header: () => <span>Find events with this item</span>,
+		Cell: () => <button type='button'>Find</button>,
+	},
+];
+
 export default function Assets() {
 	let load = useLoaderData() as AssetsLoaderData;
 
+	const [items, setItems] = useState(load.data);
+
 	return (
 		<>
-			<p>
-				{load.data.map((entry: Item) => (
-					<span>{entry.name}</span>
-				))}
-			</p>
+			<Table<Item> columns={assetColumns} rows={items} setRows={setItems} />
 		</>
 	);
 }
